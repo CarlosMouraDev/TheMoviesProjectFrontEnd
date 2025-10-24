@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { getPopularMovies } from '../../services/api';
-import { MovieCard } from '../../components/MovieCard';
+import MovieCard from '../../components/MovieCard';
 
 interface Movie {
   id: number;
@@ -44,7 +44,7 @@ export default function HomePage() {
             <MovieCard
               key={movie.id}
               title={movie.title}
-              posterPath={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+              posterPath={movie.poster_path}
               releaseDate={movie.release_date}
               rating={movie.vote_average}
             />
