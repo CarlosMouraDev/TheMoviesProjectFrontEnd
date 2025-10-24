@@ -1,35 +1,43 @@
-import React from 'react';
-
-interface MovieCardProps {
+type MovieCardProps = {
   title: string;
-  posterPath: string;
-  releaseDate: string;
-  rating: number;
-}
+  posterPath?: string;
+  releaseDate?: string;
+  rating?: number;
+};
 
-export const MovieCard: React.FC<MovieCardProps> = ({
+export default function MovieCard({
   title,
   posterPath,
   releaseDate,
   rating,
-}) => {
-  const formattedDate = new Date(releaseDate).toLocaleDateString('pt-BR');
+}: MovieCardProps) {
+  const formattedDate =
+    releaseDate && !isNaN(Date.parse(releaseDate))
+      ? new Date(releaseDate).toLocaleDateString('pt-BR')
+      : 'Data indisponível';
+
+  const validRating =
+    rating !== undefined && !isNaN(rating) && rating > 0
+      ? rating.toFixed(1)
+      : 'N/A';
+
+  const imageSrc = `https://image.tmdb.org/t/p/w500${posterPath}`;
+
   return (
-    <div className='bg-slate-800 rounded-2xl overflow-hidden shadow-lg hover:scale-105 hover:shadow-indigo-500/30 transition-transform duration-300 cursor-pointer'>
+    <div className='bg-[#1b2233] rounded-xl overflow-hidden shadow-md hover:scale-[1.03] transition-transform duration-200 cursor-pointer'>
       <img
-        src={posterPath || '/placeholder.jpg'}
+        src={imageSrc}
         alt={title}
-        className='w-full h-100 md:h-80 lg:h-110 object-cover'
+        className='w-full h-[400px] object-cover'
+        loading='lazy'
       />
-      <div className='p-4'>
-        <h3 className='text-lg font-semibold text-slate-100 truncate'>
-          {title}
-        </h3>
-        <p className='text-slate-400 text-sm'>{formattedDate}</p>
-        <p className='text-indigo-400 font-medium mt-1'>
-          ⭐ {rating ? rating.toFixed(1) : 'N/A'}
+      <div className='p-3'>
+        <h2 className='font-semibold text-white truncate'>{title}</h2>
+        <p className='text-sm text-slate-400'>{formattedDate}</p>
+        <p className='text-yellow-400 font-bold text-sm mt-1'>
+          ⭐ {validRating}
         </p>
       </div>
     </div>
   );
-};
+}
