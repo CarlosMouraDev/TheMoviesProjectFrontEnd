@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect, type ReactNode } from 'react';
 import { loginUser } from '../services/api';
-import type { AuthResponse } from '../types/user';
 
 interface AuthContextType {
   user: string | null;
@@ -22,26 +21,25 @@ export function AuthProvider({ children }: Props) {
   const [user, setUser] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // 🔄 Restaura usuário salvo no localStorage
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userData = localStorage.getItem('user');
 
     if (token && userData) {
-      setUser(JSON.parse(userData));
+      const parsed = JSON.parse(userData);
+      setUser(parsed.name);
     }
+
     setLoading(false);
   }, []);
 
-  // Login
   const login = async (email: string, password: string) => {
-    const data: AuthResponse = await loginUser({ email, password });
-    localStorage.setItem('token', data.token);
-    localStorage.setItem('user', JSON.stringify(data.user));
-    setUser(data.user.name);
+    const data = await loginUser({ email, password });
+    localStorage.setItem('token', data.accessToken);
+    localStorage.setItem('user', JSON.stringify({ name: data.name }));
+    setUser(data.name);
   };
 
-  // Logout
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

@@ -41,7 +41,7 @@ async function request<T>(
   } catch (err: any) {
     const status = err.response?.status;
     const message = err.response?.data?.message || err.message;
-    throw new Error(`Erro ${status || ''} em ${endpoint}: ${message}`);
+    throw new Error(message, status);
   }
 }
 
@@ -91,12 +91,14 @@ export async function loginUser(credentials: {
     '/auth/login',
     {
       method: 'POST',
-      data: credentials,
+      data: JSON.stringify(credentials),
     },
     false,
   );
 
-  localStorage.setItem('token', data.token);
+  localStorage.setItem('token', data.accessToken);
+  localStorage.setItem('user', JSON.stringify({ name: data.name }));
+
   return data;
 }
 
