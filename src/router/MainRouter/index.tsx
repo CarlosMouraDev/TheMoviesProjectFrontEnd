@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router';
 import HomePage from '../../pages/Home';
 import { useEffect } from 'react';
+import SearchMovies from '../../pages/Search';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -16,6 +17,7 @@ export function MainRouter() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/search' element={<SearchMovies />} />
       </Routes>
       <ScrollToTop />
     </BrowserRouter>
