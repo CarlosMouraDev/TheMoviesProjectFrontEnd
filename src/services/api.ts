@@ -1,47 +1,68 @@
+import axios, { type AxiosRequestConfig } from 'axios';
 import type { AuthResponse } from '../types/user';
+import type { MovieApiResponse } from '../types/movies';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
+const api = axios.create({
+  baseURL: API_BASE,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+api.interceptors.request.use(config => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers = config.headers || {};
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 async function request<T>(
   endpoint: string,
-  options: RequestInit = {},
+  options: AxiosRequestConfig = {},
   useAuth = false,
 ): Promise<T> {
-  const headers: any = {
-    'Content-Type': 'application/json',
-    ...(options.headers || {}),
-  };
+  try {
+    const config: AxiosRequestConfig = {
+      url: endpoint,
+      ...options,
+    };
 
-  if (useAuth) {
-    const token = localStorage.getItem('token');
-    if (token) headers['Authorization'] = `Bearer ${token}`;
+    if (!useAuth) {
+      config.headers = { ...(config.headers || {}) };
+      delete config.headers.Authorization;
+    }
+
+    const res = await api.request<T>(config);
+    return res.data;
+  } catch (err: any) {
+    const status = err.response?.status;
+    const message = err.response?.data?.message || err.message;
+    throw new Error(`Erro ${status || ''} em ${endpoint}: ${message}`);
   }
-
-  const res = await fetch(`${API_BASE}${endpoint}`, { ...options, headers });
-
-  if (!res.ok) {
-    const errorText = await res.text();
-    throw new Error(
-      `Erro ${res.status} em ${endpoint}: ${errorText || res.statusText}`,
-    );
-  }
-
-  return res.json();
 }
 
 // ==================================================
-// 🔹 FILMES (públicos)
+// 🔹 MOVIES (public)
 // ==================================================
-export async function getPopularMovies(): Promise<[]> {
-  const data = await request<{ results: [] }>('/movies/popular');
+export async function getPopularMovies(): Promise<any[]> {
+  const data = await request<{ results: any[] }>('/movies/popular');
   return data.results;
 }
 
-export async function searchMovies(query: string): Promise<[]> {
-  const data = await request<{ results: [] }>(
-    `/movies/search?query=${encodeURIComponent(query)}`,
+export async function searchMovies(query: string, page = 1) {
+  const response = await request<MovieApiResponse>(
+    `/movies/search?query=${encodeURIComponent(query)}&page=${page}`,
   );
-  return data.results;
+  return {
+    movies: response.results,
+    page: response.page,
+    total_pages: response.total_pages,
+    total_results: response.total_results,
+  };
 }
 
 export async function getMovieById(id: string | number) {
@@ -49,7 +70,7 @@ export async function getMovieById(id: string | number) {
 }
 
 // ==================================================
-// 🔹 USUÁRIO (não protegido)
+// 🔹 USER (not protected)
 // ==================================================
 export async function registerUser(userData: {
   name: string;
@@ -58,7 +79,7 @@ export async function registerUser(userData: {
 }) {
   return request('/users/register', {
     method: 'POST',
-    body: JSON.stringify(userData),
+    data: userData,
   });
 }
 
@@ -66,17 +87,21 @@ export async function loginUser(credentials: {
   email: string;
   password: string;
 }): Promise<AuthResponse> {
-  const data = await request<AuthResponse>('/auth/login', {
-    method: 'POST',
-    body: JSON.stringify(credentials),
-  });
+  const data = await request<AuthResponse>(
+    '/auth/login',
+    {
+      method: 'POST',
+      data: credentials,
+    },
+    false,
+  );
 
   localStorage.setItem('token', data.token);
   return data;
 }
 
 // ==================================================
-// 🔹 FAVORITOS (requer login)
+// 🔹 FAVORITES (need login)
 // ==================================================
 export async function addFavorite(
   movieId: number,
@@ -85,9 +110,9 @@ export async function addFavorite(
     '/favorites',
     {
       method: 'POST',
-      body: JSON.stringify({ movieId }),
+      data: { movieId },
     },
-    true, // requer token
+    true,
   );
 }
 
@@ -106,7 +131,7 @@ export async function getFavorites(): Promise<[]> {
 }
 
 // ==================================================
-// 🔹 LINKS PÚBLICOS DE FAVORITOS
+// 🔹 PUBLIC FAVORITES LINK
 // ==================================================
 export async function getUserPublicId(): Promise<{ publicId: string }> {
   return request<{ publicId: string }>('/favorites/public-id', {}, true);
