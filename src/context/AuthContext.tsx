@@ -1,9 +1,9 @@
 import { createContext, useState, useEffect, type ReactNode } from 'react';
 import { loginUser } from '../services/api';
-import type { AuthResponse, User } from '../types/user';
+import type { AuthResponse } from '../types/user';
 
 interface AuthContextType {
-  user: User | null;
+  user: string | null;
   isAuthenticated: boolean;
   loading: boolean;
   login: (email: string, password: string) => Promise<void>;
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export function AuthProvider({ children }: Props) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   // 🔄 Restaura usuário salvo no localStorage
@@ -33,15 +33,15 @@ export function AuthProvider({ children }: Props) {
     setLoading(false);
   }, []);
 
-  // 🔐 Login
+  // Login
   const login = async (email: string, password: string) => {
     const data: AuthResponse = await loginUser({ email, password });
     localStorage.setItem('token', data.token);
     localStorage.setItem('user', JSON.stringify(data.user));
-    setUser(data.user);
+    setUser(data.user.name);
   };
 
-  // 🚪 Logout
+  // Logout
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
