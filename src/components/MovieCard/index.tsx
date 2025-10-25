@@ -1,4 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+
 type MovieCardProps = {
+  id: number;
   title: string;
   posterPath?: string;
   releaseDate?: string;
@@ -6,11 +9,14 @@ type MovieCardProps = {
 };
 
 export default function MovieCard({
+  id,
   title,
   posterPath,
   releaseDate,
   rating,
 }: MovieCardProps) {
+  const navigate = useNavigate();
+
   const formattedDate =
     releaseDate && !isNaN(Date.parse(releaseDate))
       ? new Date(releaseDate).toLocaleDateString('pt-BR')
@@ -23,8 +29,15 @@ export default function MovieCard({
 
   const imageSrc = `https://image.tmdb.org/t/p/w500${posterPath}`;
 
+  const handleClick = () => {
+    navigate(`/movie/${id}`);
+  };
+
   return (
-    <div className='bg-[#1b2233] rounded-xl overflow-hidden shadow-md hover:scale-[1.03] transition-transform duration-200 cursor-pointer'>
+    <div
+      onClick={handleClick}
+      className='bg-[#1b2233] rounded-xl overflow-hidden shadow-md hover:scale-[1.03] transition-transform duration-200 cursor-pointer'
+    >
       <img
         src={imageSrc}
         alt={title}

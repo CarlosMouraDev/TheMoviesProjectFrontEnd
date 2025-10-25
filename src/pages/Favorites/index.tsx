@@ -112,6 +112,7 @@ export default function Favorites() {
             transition={{ delay: index * 0.05 }}
           >
             <MovieCard
+              id={movie.id}
               title={movie.title}
               posterPath={movie.poster_path!}
               releaseDate={movie.release_date}
