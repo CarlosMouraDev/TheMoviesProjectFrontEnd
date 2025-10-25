@@ -7,6 +7,7 @@ import Register from '../../pages/Register';
 import MovieDetails from '../../pages/MovieDetails';
 import PrivateRoute from '../../components/PrivateRoute';
 import Favorites from '../../pages/Favorites';
+import PublicFavorites from '../../pages/PublicFavorites';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -26,6 +27,10 @@ export function MainRouter() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/movie/:id' element={<MovieDetails />} />
+        <Route
+          path='/favorites/public/:publicId'
+          element={<PublicFavorites />}
+        />
         <Route
           path='/favorites'
           element={
