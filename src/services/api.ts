@@ -1,6 +1,10 @@
 import axios, { type AxiosRequestConfig } from 'axios';
 import type { AuthResponse } from '../types/user';
-import type { MovieApiResponse, SingleMovie } from '../types/movies';
+import type {
+  MovieApiResponse,
+  PublicResponse,
+  SingleMovie,
+} from '../types/movies';
 import { toast } from 'react-toastify';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
@@ -142,10 +146,19 @@ export async function getFavorites(): Promise<SingleMovie[]> {
 // ==================================================
 // 🔹 PUBLIC FAVORITES LINK
 // ==================================================
-export async function getUserPublicId(): Promise<{ publicId: string }> {
-  return request<{ publicId: string }>('/favorites/public-id', {}, true);
+export async function getUserPublicId(): Promise<{
+  publicId: string;
+  link: string;
+}> {
+  return request<{ publicId: string; link: string }>(
+    '/users/public-link',
+    {},
+    true,
+  );
 }
 
-export async function getFavoritesByPublicId(publicId: string): Promise<[]> {
-  return request<[]>(`/favorites/public/${publicId}`);
+export async function getFavoritesByPublicId(
+  publicId: string,
+): Promise<PublicResponse> {
+  return request<PublicResponse>(`/favorites/public/${publicId}`);
 }

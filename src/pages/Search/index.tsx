@@ -68,7 +68,7 @@ export default function SearchMovies() {
                 <MovieCard
                   key={movie.id}
                   title={movie.title}
-                  posterPath={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+                  posterPath={movie.poster_path!}
                   releaseDate={movie.release_date}
                   rating={movie.vote_average}
                 />

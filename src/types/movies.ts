@@ -30,3 +30,8 @@ export interface SingleMovie {
   vote_average: number;
   vote_count: number;
 }
+
+export interface PublicResponse {
+  name: string;
+  movies: SingleMovie[];
+}
