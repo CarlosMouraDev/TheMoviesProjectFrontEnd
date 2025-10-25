@@ -1,6 +1,7 @@
 import axios, { type AxiosRequestConfig } from 'axios';
 import type { AuthResponse } from '../types/user';
-import type { MovieApiResponse } from '../types/movies';
+import type { MovieApiResponse, SingleMovie } from '../types/movies';
+import { toast } from 'react-toastify';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
@@ -39,6 +40,12 @@ async function request<T>(
     const res = await api.request<T>(config);
     return res.data;
   } catch (err: any) {
+    if (err.response?.status === 401) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = '/login';
+      toast.info('Faça login novamente');
+    }
     const status = err.response?.status;
     const message = err.response?.data?.message || err.message;
     throw new Error(message, status);
@@ -66,7 +73,7 @@ export async function searchMovies(query: string, page = 1) {
 }
 
 export async function getMovieById(id: string | number) {
-  return request(`/movies/${id}`);
+  return request<SingleMovie>(`/movies/${id}`);
 }
 
 // ==================================================
@@ -128,8 +135,8 @@ export async function removeFavorite(
   );
 }
 
-export async function getFavorites(): Promise<[]> {
-  return request<[]>('/favorites', {}, true);
+export async function getFavorites(): Promise<SingleMovie[]> {
+  return request<SingleMovie[]>('/favorites', {}, true);
 }
 
 // ==================================================

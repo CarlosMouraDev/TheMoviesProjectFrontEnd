@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import SearchMovies from '../../pages/Search';
 import Login from '../../pages/Login';
 import Register from '../../pages/Register';
+import MovieDetails from '../../pages/MovieDetails';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -22,6 +23,7 @@ export function MainRouter() {
         <Route path='/search' element={<SearchMovies />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/movie/:id' element={<MovieDetails />} />
       </Routes>
       <ScrollToTop />
     </BrowserRouter>
