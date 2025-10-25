@@ -8,6 +8,7 @@ import MovieDetails from '../../pages/MovieDetails';
 import PrivateRoute from '../../components/PrivateRoute';
 import Favorites from '../../pages/Favorites';
 import PublicFavorites from '../../pages/PublicFavorites';
+import { MainTemplate } from '../../Templates/MainTemplate';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -21,26 +22,28 @@ function ScrollToTop() {
 export function MainRouter() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/search' element={<SearchMovies />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/register' element={<Register />} />
-        <Route path='/movie/:id' element={<MovieDetails />} />
-        <Route
-          path='/favorites/public/:publicId'
-          element={<PublicFavorites />}
-        />
-        <Route
-          path='/favorites'
-          element={
-            <PrivateRoute>
-              <Favorites />
-            </PrivateRoute>
-          }
-        />
-      </Routes>
-      <ScrollToTop />
+      <MainTemplate>
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/search' element={<SearchMovies />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/movie/:id' element={<MovieDetails />} />
+          <Route
+            path='/favorites/public/:publicId'
+            element={<PublicFavorites />}
+          />
+          <Route
+            path='/favorites'
+            element={
+              <PrivateRoute>
+                <Favorites />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+        <ScrollToTop />
+      </MainTemplate>
     </BrowserRouter>
   );
 }
