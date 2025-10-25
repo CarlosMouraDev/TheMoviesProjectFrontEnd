@@ -20,6 +20,10 @@ export default function MovieDetails() {
   const { isAuthenticated } = useAuth();
 
   useEffect(() => {
+    document.title = `Movies | detalhes`;
+  }, []);
+
+  useEffect(() => {
     async function fetchMovie() {
       try {
         const data = await getMovieById(id!);

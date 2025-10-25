@@ -15,6 +15,10 @@ export default function HomePage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = 'Movies | Home';
+  }, []);
+
+  useEffect(() => {
     (async () => {
       try {
         const data = await getPopularMovies();

@@ -12,6 +12,10 @@ export default function PublicFavorites() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    document.title = 'Movies | Favoritos';
+  }, []);
+
+  useEffect(() => {
     const fetchPublicFavorites = async () => {
       if (!publicId) {
         setError('Link inválido.');

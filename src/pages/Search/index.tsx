@@ -12,6 +12,10 @@ export default function SearchMovies() {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
+  useEffect(() => {
+    document.title = 'Movies | Pesquisar';
+  }, []);
+
   async function handleSearch(e?: React.FormEvent) {
     if (e) e.preventDefault();
     if (!query.trim()) return;

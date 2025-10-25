@@ -12,6 +12,10 @@ export default function Favorites() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
+    document.title = 'Movies | Favoritos';
+  }, []);
+
+  useEffect(() => {
     const fetchFavoritesAndLink = async () => {
       try {
         const [movies, user] = await Promise.all([

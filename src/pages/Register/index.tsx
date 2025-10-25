@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../services/api';
 import { toast } from 'react-toastify';
@@ -10,6 +10,10 @@ export default function Register() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    document.title = 'Movies | Criar conta';
+  }, []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
