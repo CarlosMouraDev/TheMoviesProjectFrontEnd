@@ -5,6 +5,7 @@ import type { UserInfo } from '../../types/user';
 export default function UserProfile() {
   const [user, setUser] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
+  const [sending, setSending] = useState(false);
   const [error, setError] = useState('');
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -27,10 +28,15 @@ export default function UserProfile() {
 
   async function handleChangePassword(e: React.FormEvent) {
     e.preventDefault();
+    setSending(true);
     setError('');
     setSuccessMessage('');
 
     try {
+      if (newPassword.length < 5 || newPassword.length > 10) {
+        setError('A nova senha precisa ter entre 5 e 10 caracteres');
+        return;
+      }
       await updatePassword({
         currentPassword,
         newPassword,
@@ -41,19 +47,25 @@ export default function UserProfile() {
     } catch (err: any) {
       setError(
         err.response?.data?.message ||
+          err.message ||
           'Erro ao atualizar senha. Verifique os dados.',
       );
+    } finally {
+      setSending(false);
     }
   }
 
   if (loading)
-    return <p className='text-center text-slate-400 mt-10'>Carregando...</p>;
+    return (
+      <p className='min-h-[82vh] text-center text-slate-400 mt-10'>
+        Carregando...
+      </p>
+    );
 
   return (
     <div className='min-h-[86vh] bg-[#0d1220] text-white flex flex-col items-center px-6 py-10'>
       <div className='w-full max-w-md bg-[#1b2233] rounded-2xl shadow-lg p-8'>
         <div className='flex flex-col items-center mb-6'>
-          {/* Avatar circular com inicial */}
           <div className='flex items-center justify-center w-20 h-20 rounded-full bg-blue-600 text-3xl font-bold mb-3'>
             {user?.name?.charAt(0).toUpperCase()}
           </div>
@@ -103,9 +115,10 @@ export default function UserProfile() {
 
           <button
             type='submit'
-            className='mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-all'
+            disabled={sending}
+            className='cursor-pointer mt-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium transition-all disabled:opacity-50 disabled:cursor-not-allowed'
           >
-            Atualizar Senha
+            {loading ? 'Atualizando...' : 'Atualizar Senha'}
           </button>
         </form>
       </div>

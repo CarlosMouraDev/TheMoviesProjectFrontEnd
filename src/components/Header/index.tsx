@@ -35,12 +35,15 @@ export default function Header() {
             <>
               <Link
                 to='/favorites'
-                className='bg-[#6366f1] hover:bg-[#4f46e5] px-3 py-2 rounded-lg transition'
+                className='bg-[#6366f1] hover:bg-[#4f46e5] px-3 py-2 rounded-lg transition cursor-pointer'
               >
                 Meus Favoritos
               </Link>
 
-              <div className='flex items-center gap-2 bg-[#1b2233] px-3 py-2 rounded-lg'>
+              <div
+                onClick={() => navigate('/profile')}
+                className='flex items-center gap-2 bg-[#1b2233] px-3 py-2 rounded-lg cursor-pointer hover:text-[#0ea5e9]'
+              >
                 <User size={18} className='text-[#22d3ee]' />
                 <span className='font-medium'>{user}</span>
               </div>
@@ -56,13 +59,13 @@ export default function Header() {
             <>
               <Link
                 to='/login'
-                className='bg-[#6366f1] hover:bg-[#4f46e5] px-3 py-2 rounded-lg transition'
+                className='bg-[#6366f1] hover:bg-[#4f46e5] px-3 py-2 rounded-lg transition cursor-pointer'
               >
                 Login
               </Link>
               <Link
                 to='/register'
-                className='bg-[#22d3ee] hover:bg-[#0ea5e9] px-3 py-2 rounded-lg text-[#0f172a] font-medium transition'
+                className='bg-[#22d3ee] hover:bg-[#0ea5e9] px-3 py-2 rounded-lg text-[#0f172a] font-medium transition cursor-pointer'
               >
                 Criar Conta
               </Link>
@@ -72,7 +75,7 @@ export default function Header() {
 
         <button
           onClick={toggleMenu}
-          className='md:hidden text-[#f1f5f9] focus:outline-none'
+          className='md:hidden text-[#f1f5f9] focus:outline-none cursor-pointer'
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -92,7 +95,7 @@ export default function Header() {
                 navigate('/search');
                 setMenuOpen(false);
               }}
-              className='flex items-center gap-2 hover:text-[#22d3ee] transition'
+              className='flex items-center gap-2 hover:text-[#22d3ee] transition cursor-pointer'
             >
               <Search size={18} />
               Pesquisar
@@ -103,12 +106,15 @@ export default function Header() {
                 <Link
                   to='/favorites'
                   onClick={() => setMenuOpen(false)}
-                  className='hover:text-[#22d3ee] transition'
+                  className='hover:text-[#22d3ee] transition cursor-pointer'
                 >
                   Meus Favoritos
                 </Link>
 
-                <div className='flex items-center gap-2'>
+                <div
+                  onClick={() => navigate('/profile')}
+                  className='flex items-center gap-2 hover:text-[#22d3ee] cursor-pointer'
+                >
                   <User size={18} className='text-[#22d3ee]' />
                   <span>{user}</span>
                 </div>
@@ -118,7 +124,7 @@ export default function Header() {
                     logout();
                     setMenuOpen(false);
                   }}
-                  className='text-sm text-red-400 hover:text-red-300 transition'
+                  className='text-sm text-red-400 hover:text-red-300 transition cursor-pointer'
                 >
                   Sair
                 </button>
@@ -128,14 +134,14 @@ export default function Header() {
                 <Link
                   to='/login'
                   onClick={() => setMenuOpen(false)}
-                  className='hover:text-[#22d3ee] transition'
+                  className='hover:text-[#22d3ee] transition cursor-pointer'
                 >
                   Login
                 </Link>
                 <Link
                   to='/register'
                   onClick={() => setMenuOpen(false)}
-                  className='hover:text-[#22d3ee] transition'
+                  className='hover:text-[#22d3ee] transition cursor-pointer'
                 >
                   Criar Conta
                 </Link>

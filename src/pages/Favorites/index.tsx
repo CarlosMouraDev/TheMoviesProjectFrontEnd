@@ -45,7 +45,7 @@ export default function Favorites() {
 
   if (isLoading) {
     return (
-      <div className='flex items-center justify-center min-h-screen bg-[#0f172a] text-[#f1f5f9]'>
+      <div className='flex items-center justify-center min-h-[82vh] bg-[#0f172a] text-[#f1f5f9]'>
         <div className='flex flex-col items-center animate-pulse'>
           <div className='h-10 w-10 border-4 border-[#6366f1] border-t-transparent rounded-full animate-spin mb-4' />
           <p className='text-[#94a3b8] text-lg'>Carregando seus favoritos...</p>
@@ -64,7 +64,7 @@ export default function Favorites() {
 
   if (favorites.length === 0) {
     return (
-      <div className='flex flex-col items-center justify-center min-h-screen bg-[#0f172a] text-[#f1f5f9]'>
+      <div className='flex flex-col items-center justify-center min-h-[82vh] bg-[#0f172a] text-[#f1f5f9]'>
         <motion.h1
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ export default function Favorites() {
   }
 
   return (
-    <div className='min-h-screen bg-[#0f172a] text-[#f1f5f9] px-6 py-12'>
+    <div className='min-h-[86vh] bg-[#0f172a] text-[#f1f5f9] px-6 py-12'>
       <motion.h1
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
@@ -94,10 +94,10 @@ export default function Favorites() {
       </motion.h1>
 
       {publicLink && (
-        <div className='flex justify-center mb-10'>
+        <div className='flex justify-center mb-10 '>
           <button
             onClick={handleCopyLink}
-            className='flex items-center gap-2 bg-[#6366f1] hover:bg-[#4f46e5] text-white px-4 py-2 rounded-lg transition font-medium'
+            className='flex items-center gap-2 bg-[#6366f1] hover:bg-[#4f46e5] text-white px-4 py-2 rounded-lg transition font-medium cursor-pointer'
           >
             {copied ? '✅ Link copiado!' : '🔗 Copiar link público'}
           </button>

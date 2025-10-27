@@ -38,7 +38,7 @@ export default function PublicFavorites() {
 
   if (isLoading) {
     return (
-      <div className='flex items-center justify-center min-h-screen bg-[#0f172a] text-[#f1f5f9]'>
+      <div className='min-h-[82vh] flex items-center justify-center bg-[#0f172a] text-[#f1f5f9]'>
         Carregando favoritos públicos...
       </div>
     );

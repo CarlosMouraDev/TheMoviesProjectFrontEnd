@@ -54,7 +54,7 @@ export default function SearchMovies() {
         />
         <button
           type='submit'
-          className='px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium'
+          className='cursor-pointer px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg font-medium'
         >
           Buscar
         </button>

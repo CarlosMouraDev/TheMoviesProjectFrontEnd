@@ -65,7 +65,11 @@ export default function MovieDetails() {
   }
 
   if (loading)
-    return <p className='text-center mt-10 text-[#94a3b8]'>Carregando...</p>;
+    return (
+      <p className='min-h-[82vh] text-center mt-10 text-[#94a3b8]'>
+        Carregando...
+      </p>
+    );
 
   if (!movie)
     return (
@@ -99,7 +103,7 @@ export default function MovieDetails() {
             <button
               onClick={handleFavorite}
               disabled={favoriting}
-              className={`mt-6 px-4 py-2 rounded-xl flex items-center gap-2 transition-all ${
+              className={`mt-6 px-4 py-2 rounded-xl flex items-center gap-2 transition-all cursor-pointer disabled:cursor-not-allowed ${
                 favoriting
                   ? 'bg-gray-600 cursor-not-allowed'
                   : isFavorite
