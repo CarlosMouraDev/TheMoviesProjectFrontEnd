@@ -25,6 +25,11 @@ export default function Register() {
       return;
     }
 
+    if (name.length < 3 || name.length > 15) {
+      setError('Seu nome deve conter entre 3 e 15 caracteres');
+      return;
+    }
+
     try {
       await registerUser({ name, email, password });
       toast.success('Usuário criado com sucesso!');
