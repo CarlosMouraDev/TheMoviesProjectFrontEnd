@@ -44,7 +44,7 @@ async function request<T>(
     const res = await api.request<T>(config);
     return res.data;
   } catch (err: any) {
-    if (err.response?.status === 401) {
+    if (err.response?.status === 401 && endpoint !== '/auth/login') {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       window.location.href = '/login';
