@@ -14,7 +14,7 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className='px-3 py-2 bg-[#1b2233] text-white rounded-md hover:bg-blue-700 disabled:opacity-40 transition'
+        className='px-3 py-2 bg-[#1b2233] text-white rounded-md hover:bg-blue-700 disabled:opacity-40 transition cursor-pointer disabled:cursor-not-allowed'
       >
         ◀ Anterior
       </button>
@@ -26,7 +26,7 @@ export default function Pagination({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className='px-3 py-2 bg-[#1b2233] text-white rounded-md hover:bg-blue-700 disabled:opacity-40 transition'
+        className='px-3 py-2 bg-[#1b2233] text-white rounded-md hover:bg-blue-700 disabled:opacity-40 transition cursor-pointer disabled:cursor-not-allowed'
       >
         Próxima ▶
       </button>
