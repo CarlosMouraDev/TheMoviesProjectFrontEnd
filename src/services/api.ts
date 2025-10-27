@@ -59,9 +59,16 @@ async function request<T>(
 // ==================================================
 // 🔹 MOVIES (public)
 // ==================================================
-export async function getPopularMovies(): Promise<any[]> {
-  const data = await request<{ results: any[] }>('/movies/popular');
-  return data.results;
+export async function getPopularMovies(page = 1) {
+  const response = await request<MovieApiResponse>(
+    `/movies/popular?page=${page}`,
+  );
+  return {
+    movies: response.results,
+    page: response.page,
+    total_pages: response.total_pages,
+    total_results: response.total_results,
+  };
 }
 
 export async function searchMovies(query: string, page = 1) {

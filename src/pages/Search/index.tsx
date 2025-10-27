@@ -37,7 +37,7 @@ export default function SearchMovies() {
   }, [page, query]);
 
   return (
-    <div className='min-h-[87vh] bg-[#0d1220] text-white pt-10'>
+    <div className='min-h-[87vh] md:min-h-[85.5vh] bg-[#0d1220] text-white pt-10'>
       <form
         onSubmit={handleSearch}
         className='flex justify-center gap-2 mb-10 px-4'

@@ -84,7 +84,7 @@ export default function Favorites() {
   }
 
   return (
-    <div className='min-h-[86vh] bg-[#0f172a] text-[#f1f5f9] px-6 py-12'>
+    <div className='min-h-[87vh] md:min-h-[85.5vh] bg-[#0d1220] text-[#f1f5f9] px-6 py-12'>
       <motion.h1
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}

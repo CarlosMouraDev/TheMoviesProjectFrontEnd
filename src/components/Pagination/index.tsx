@@ -10,6 +10,7 @@ export default function Pagination({
   onPageChange,
 }: PaginationProps) {
   return (
+    // Controlls the pagination
     <div className='flex justify-center items-center gap-3 mt-6 mb-10 '>
       <button
         onClick={() => onPageChange(currentPage - 1)}

@@ -4,6 +4,7 @@ type MessagesContainerProps = {
   children: React.ReactNode;
 };
 
+// React toastify config
 export function MessagesContainer({ children }: MessagesContainerProps) {
   return (
     <>

@@ -66,25 +66,27 @@ export default function MovieDetails() {
 
   if (loading)
     return (
-      <p className='min-h-[82vh] text-center mt-10 text-[#94a3b8]'>
+      <p className='min-h-[87vh] md:min-h-[85.5vh] bg-[#0d1220] text-center mt-10 text-[#94a3b8]'>
         Carregando...
       </p>
     );
 
   if (!movie)
     return (
-      <p className='text-center mt-10 text-[#94a3b8]'>Filme não encontrado.</p>
+      <p className='min-h-[87vh] md:min-h-[85.5vh] bg-[#0d1220] text-center mt-10 text-[#94a3b8]'>
+        Filme não encontrado.
+      </p>
     );
 
   return (
-    <div className='min-h-screen bg-[#0f172a] text-[#f1f5f9]'>
+    <div className='min-h-[87vh] md:min-h-[85.5vh] bg-[#0d1220] text-[#f1f5f9]'>
       <div
         className='relative h-[400px] bg-cover bg-center'
         style={{
           backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
         }}
       >
-        <div className='absolute inset-0 bg-linear-to-t from-[#0f172a] via-[#0f172a]/60 to-transparent' />
+        <div className='absolute inset-0 bg-linear-to-t from-[#0d1220] via-[#0f172a]/60 to-transparent' />
       </div>
 
       <div className='max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-[300px_1fr] gap-10'>

@@ -33,6 +33,7 @@ export function AuthProvider({ children }: Props) {
     setLoading(false);
   }, []);
 
+  // log in the user
   const login = async (email: string, password: string) => {
     const data = await loginUser({ email, password });
     localStorage.setItem('token', data.accessToken);
@@ -40,6 +41,7 @@ export function AuthProvider({ children }: Props) {
     setUser(data.name);
   };
 
+  // log out the user
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');

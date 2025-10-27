@@ -38,7 +38,7 @@ export default function PublicFavorites() {
 
   if (isLoading) {
     return (
-      <div className='min-h-[82vh] flex items-center justify-center bg-[#0f172a] text-[#f1f5f9]'>
+      <div className='min-h-[87vh] md:min-h-[85.5vh] bg-[#0d1220] flex items-center justify-center text-[#f1f5f9]'>
         Carregando favoritos públicos...
       </div>
     );
@@ -46,7 +46,7 @@ export default function PublicFavorites() {
 
   if (error) {
     return (
-      <div className='flex flex-col items-center justify-center min-h-screen bg-[#0f172a] text-red-400 gap-4'>
+      <div className='flex flex-col items-center justify-center min-h-[87vh] md:min-h-[85.5vh] bg-[#0d1220] text-red-400 gap-4'>
         <p>{error}</p>
         <button
           onClick={() => navigate('/')}
@@ -60,7 +60,7 @@ export default function PublicFavorites() {
 
   if (!data || data.movies.length === 0) {
     return (
-      <div className='flex flex-col items-center justify-center min-h-screen bg-[#0f172a] text-[#f1f5f9]'>
+      <div className='flex flex-col items-center justify-center min-h-[87vh] md:min-h-[85.5vh] bg-[#0d1220] text-[#f1f5f9]'>
         <h1 className='text-2xl font-semibold mb-2'>
           {data?.name
             ? `${data.name} ainda não tem favoritos 😢`

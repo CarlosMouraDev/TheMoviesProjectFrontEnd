@@ -17,6 +17,7 @@ export default function MovieCard({
 }: MovieCardProps) {
   const navigate = useNavigate();
 
+  // filters unavailable data
   const formattedDate =
     releaseDate && !isNaN(Date.parse(releaseDate))
       ? new Date(releaseDate).toLocaleDateString('pt-BR')

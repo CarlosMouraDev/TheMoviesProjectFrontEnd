@@ -9,6 +9,7 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
+  // Controlls mobile menu
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
   return (

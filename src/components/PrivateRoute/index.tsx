@@ -9,6 +9,7 @@ interface Props {
 export default function PrivateRoute({ children }: Props) {
   const { isAuthenticated, loading } = useAuth();
 
+  // Redirect user to /login if he's logged out
   if (loading)
     return (
       <div className='flex items-center justify-center min-h-screen bg-[#0f172a] text-[#f1f5f9]'>

@@ -63,7 +63,7 @@ export default function UserProfile() {
     );
 
   return (
-    <div className='min-h-[86vh] bg-[#0d1220] text-white flex flex-col items-center px-6 py-10'>
+    <div className='min-h-[87vh] md:min-h-[85.5vh] bg-[#0d1220] text-white flex flex-col items-center px-6 py-10'>
       <div className='w-full max-w-md bg-[#1b2233] rounded-2xl shadow-lg p-8'>
         <div className='flex flex-col items-center mb-6'>
           <div className='flex items-center justify-center w-20 h-20 rounded-full bg-blue-600 text-3xl font-bold mb-3'>
