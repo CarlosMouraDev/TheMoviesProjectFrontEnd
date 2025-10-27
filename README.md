@@ -8,6 +8,16 @@ CI/CD automático.
 
 ---
 
+> ⚠️ **Atenção:** Como o back-end do projeto está hospedado em um **plano
+> gratuito**, o servidor entra em **modo de hibernação** após um período de
+> inatividade (geralmente cerca de 15 minutos sem requisições).  
+> Quando isso acontece, a **primeira requisição** após esse tempo pode demorar
+> **30 segundos a 1 minuto** para responder.  
+> Depois disso, o servidor “acorda” e as requisições voltam a ter desempenho
+> normal.
+
+---
+
 ## **Tecnologias Utilizadas**
 
 - **React** — biblioteca principal para construção da interface
