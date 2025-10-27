@@ -1,5 +1,5 @@
 import axios, { type AxiosRequestConfig } from 'axios';
-import type { AuthResponse } from '../types/user';
+import type { AuthResponse, UserInfo } from '../types/user';
 import type {
   MovieApiResponse,
   PublicResponse,
@@ -111,6 +111,34 @@ export async function loginUser(credentials: {
   localStorage.setItem('user', JSON.stringify({ name: data.name }));
 
   return data;
+}
+
+// ==================================================
+// 🔹 USER (protected)
+// ==================================================
+
+export async function getUserInfo(): Promise<UserInfo> {
+  return request<UserInfo>(
+    '/users/info',
+    {
+      method: 'GET',
+    },
+    true,
+  );
+}
+
+export async function updatePassword(data: {
+  currentPassword: string;
+  newPassword: string;
+}) {
+  return request(
+    '/users/password',
+    {
+      method: 'PATCH',
+      data,
+    },
+    true,
+  );
 }
 
 // ==================================================

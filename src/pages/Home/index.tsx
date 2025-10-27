@@ -32,7 +32,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className='min-h-screen bg-[#0f172a] text-[#f1f5f9]'>
+    <div className='min-h-[86vh] bg-[#0f172a] text-[#f1f5f9]'>
       <header className='text-center py-10'>
         <h1 className='text-4xl font-bold text-[#22d3ee] mb-2'>
           🎬 Filmes Populares

@@ -9,6 +9,7 @@ import PrivateRoute from '../../components/PrivateRoute';
 import Favorites from '../../pages/Favorites';
 import PublicFavorites from '../../pages/PublicFavorites';
 import { MainTemplate } from '../../Templates/MainTemplate';
+import UserProfile from '../../pages/UserProfile';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -38,6 +39,14 @@ export function MainRouter() {
             element={
               <PrivateRoute>
                 <Favorites />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path='/profile'
+            element={
+              <PrivateRoute>
+                <UserProfile />
               </PrivateRoute>
             }
           />
