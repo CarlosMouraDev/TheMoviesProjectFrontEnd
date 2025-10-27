@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
+// Login page
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();

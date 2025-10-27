@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../../services/api';
 import { toast } from 'react-toastify';
 
+// User creation, redirects to login if user is created successfully
 export default function Register() {
   const navigate = useNavigate();
   const [name, setName] = useState('');

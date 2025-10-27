@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import type { SingleMovie } from '../../types/movies';
 import { Star, Heart, HeartOff, CircleOff } from 'lucide-react';
 
+// Show movie details and add/remove favorite if user is loged in
 export default function MovieDetails() {
   const { id } = useParams<{ id: string }>();
   const [movie, setMovie] = useState<SingleMovie | null>(null);

@@ -5,6 +5,7 @@ type MainTemplateProps = {
   children: React.ReactNode;
 };
 
+// Page template
 export function MainTemplate({ children }: MainTemplateProps) {
   return (
     <>

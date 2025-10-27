@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getUserInfo, updatePassword } from '../../services/api';
 import type { UserInfo } from '../../types/user';
 
+// User profile page with password change option, needs to be loged in
 export default function UserProfile() {
   const [user, setUser] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
@@ -10,6 +11,10 @@ export default function UserProfile() {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+
+  useEffect(() => {
+    document.title = 'Movies | Perfil';
+  }, []);
 
   useEffect(() => {
     async function fetchUser() {

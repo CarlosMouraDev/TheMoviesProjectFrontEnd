@@ -4,6 +4,7 @@ import MovieCard from '../../components/MovieCard';
 import type { Movie } from '../../types/movies';
 import Pagination from '../../components/Pagination';
 
+// Show current popular movies with pagination
 export default function HomePage() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);

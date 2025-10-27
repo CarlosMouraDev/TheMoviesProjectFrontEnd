@@ -4,6 +4,7 @@ import { getFavoritesByPublicId } from '../../services/api';
 import type { PublicResponse } from '../../types/movies';
 import MovieCard from '../../components/MovieCard';
 
+// Show favorites from public link, don't need to be loged in
 export default function PublicFavorites() {
   const { publicId } = useParams<{ publicId: string }>();
   const [data, setData] = useState<PublicResponse | null>(null);

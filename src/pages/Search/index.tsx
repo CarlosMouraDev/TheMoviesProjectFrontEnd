@@ -4,6 +4,7 @@ import MovieCard from '../../components/MovieCard';
 import Pagination from '../../components/Pagination';
 import type { Movie } from '../../types/movies';
 
+// Search for movies with pagination
 export default function SearchMovies() {
   const [query, setQuery] = useState('');
   const [movies, setMovies] = useState<Movie[]>([]);

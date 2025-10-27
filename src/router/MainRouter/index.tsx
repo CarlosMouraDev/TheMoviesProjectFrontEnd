@@ -20,6 +20,7 @@ function ScrollToTop() {
   return null;
 }
 
+// Page routes
 export function MainRouter() {
   return (
     <BrowserRouter>
@@ -34,6 +35,7 @@ export function MainRouter() {
             path='/favorites/public/:publicId'
             element={<PublicFavorites />}
           />
+          !-- Protected --!
           <Route
             path='/favorites'
             element={

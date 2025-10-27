@@ -4,6 +4,7 @@ import MovieCard from '../../components/MovieCard';
 import type { SingleMovie } from '../../types/movies';
 import { motion } from 'framer-motion';
 
+// Show personal favorites, needs to be loged in
 export default function Favorites() {
   const [favorites, setFavorites] = useState<SingleMovie[]>([]);
   const [error, setError] = useState<string | null>(null);
